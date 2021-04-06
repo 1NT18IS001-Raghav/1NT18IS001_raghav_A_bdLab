@@ -1,0 +1,335 @@
+mongo
+MongoDB shell version v3.6.8
+connecting to: mongodb://127.0.0.1:27017
+Implicit session: session { "id" : UUID("44866001-62a2-4466-9818-df90824e34f5") }
+MongoDB server version: 3.6.8
+Server has startup warnings: 
+2021-03-19T19:28:21.411+0530 I STORAGE  [initandlisten] 
+2021-03-19T19:28:21.412+0530 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2021-03-19T19:28:21.412+0530 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2021-03-19T19:28:25.941+0530 I CONTROL  [initandlisten] 
+2021-03-19T19:28:25.941+0530 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2021-03-19T19:28:25.942+0530 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2021-03-19T19:28:25.942+0530 I CONTROL  [initandlisten] 
+> use database company
+2021-03-23T15:13:27.920+0530 E QUERY    [thread1] Error: [database company] is not a valid database name :
+Mongo.prototype.getDB@src/mongo/shell/mongo.js:56:12
+getDatabase@src/mongo/shell/session.js:663:28
+DB.prototype.getSiblingDB@src/mongo/shell/db.js:20:16
+shellHelper.use@src/mongo/shell/utils.js:763:10
+shellHelper@src/mongo/shell/utils.js:750:15
+@(shellhelp2):1:1
+> use company
+switched to db company
+> db.employeedetails.insert({_id:1,fname:"rohan",lname:"sharma",age:26,email:"rohansharma@gmail.com",phone:"91085066112",experience:5});
+WriteResult({ "nInserted" : 1 })
+> db.employeedetails.insert({_id:2,fname:"raghav",lname:"agali",age:21,email:"raghavafgali@gmail.com",phone:"9102066112",experience:1});
+WriteResult({ "nInserted" : 1 })
+> db.employeedetails.insert({_id:3,fname:"aakash",lname:"ns",age:21,email:"aakashns@gmail.com",phone:"9102066123",experience:2});
+WriteResult({ "nInserted" : 1 })
+> show collections
+employeedetails
+> db.employeedetails.find();
+{ "_id" : 1, "fname" : "rohan", "lname" : "sharma", "age" : 26, "email" : "rohansharma@gmail.com", "phone" : "91085066112", "experience" : 5 }
+{ "_id" : 2, "fname" : "raghav", "lname" : "agali", "age" : 21, "email" : "raghavafgali@gmail.com", "phone" : "9102066112", "experience" : 1 }
+{ "_id" : 3, "fname" : "aakash", "lname" : "ns", "age" : 21, "email" : "aakashns@gmail.com", "phone" : "9102066123", "experience" : 2 }
+{ "_id" : 4, "fname" : "ali", "lname" : "shawn", "age" : 21, "email" : "alis@gmail.com", "phone" : "9102061234", "experience" : 3 }
+{ "_id" : 5, "fname" : "abhay", "lname" : "yelameli", "age" : 29, "email" : "abhayyelameli@gmail.com", "phone" : "9102001234", "experience" : 8 }
+{ "_id" : 6, "fname" : "alok", "lname" : "kumar", "age" : 27, "email" : "alokkumar@gmail.com", "phone" : "000001234", "experience" : 7 }
+> db.employeedetails.insertmany([{_id:7,fname:"anusha",lname:"manami",age:25,email:"anushamanami@gmail.com",phone:"000001200",experience:3},{_id:8,fname:"namitha",lname:"shree",age:25,email:"namithashree@gmail.com",phone:"8296806846",experience:3},{});
+... 
+... 
+> db.employeedetails.find();
+{ "_id" : 1, "fname" : "rohan", "lname" : "sharma", "age" : 26, "email" : "rohansharma@gmail.com", "phone" : "91085066112", "experience" : 5 }
+{ "_id" : 2, "fname" : "raghav", "lname" : "agali", "age" : 21, "email" : "raghavafgali@gmail.com", "phone" : "9102066112", "experience" : 1 }
+{ "_id" : 3, "fname" : "aakash", "lname" : "ns", "age" : 21, "email" : "aakashns@gmail.com", "phone" : "9102066123", "experience" : 2 }
+{ "_id" : 4, "fname" : "ali", "lname" : "shawn", "age" : 21, "email" : "alis@gmail.com", "phone" : "9102061234", "experience" : 3 }
+{ "_id" : 5, "fname" : "abhay", "lname" : "yelameli", "age" : 29, "email" : "abhayyelameli@gmail.com", "phone" : "9102001234", "experience" : 8 }
+{ "_id" : 6, "fname" : "alok", "lname" : "kumar", "age" : 27, "email" : "alokkumar@gmail.com", "phone" : "000001234", "experience" : 7 }
+> db.employeedetails.insert({_id:6,fname:"namitha",lname:"shree",age:24,email:"namithashree@gmail.com",phone:"000003737",experience:3});
+WriteResult({
+	"nInserted" : 0,
+	"writeError" : {
+		"code" : 11000,
+		"errmsg" : "E11000 duplicate key error collection: company.employeedetails index: _id_ dup key: { : 6.0 }"
+	}
+})
+> db.employeedetails.insert({_id:7,fname:"namitha",lname:"shree",age:24,email:"namithashree@gmail.com",phone:"000003737",experience:3})
+WriteResult({ "nInserted" : 1 })
+> db.employeedetails.insert({_id:8,fname:"rig",lname:"smith",age:24,email:"rigsmith@gmail.com",phone:"000003730",experience:5})
+WriteResult({ "nInserted" : 1 })
+> db.employeedetails.insert({_id:9,fname:"racheal",lname:"ross",age:24,email:"racheal@gmail.com",phone:"000003730",experience:6})
+WriteResult({ "nInserted" : 1 })
+> db.employeedetails.insert({_id:10,fname:"john",lname:"snow",age:27,email:"johnsnow@gmail.com",phone:"000003000",experience:6})
+WriteResult({ "nInserted" : 1 })
+> db.createCollection("test");
+{ "ok" : 1 }
+> db.test.insertMany([{name:"rahhav",age:5},{name:"ali",age:6},{name:"aakash",age:7}])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("6059c1c9baeba38c780f3405"),
+		ObjectId("6059c1c9baeba38c780f3406"),
+		ObjectId("6059c1c9baeba38c780f3407")
+	]
+}
+> db.employeedetails.find().pretty();
+{
+	"_id" : 1,
+	"fname" : "rohan",
+	"lname" : "sharma",
+	"age" : 26,
+	"email" : "rohansharma@gmail.com",
+	"phone" : "91085066112",
+	"experience" : 5
+}
+{
+	"_id" : 2,
+	"fname" : "raghav",
+	"lname" : "agali",
+	"age" : 21,
+	"email" : "raghavafgali@gmail.com",
+	"phone" : "9102066112",
+	"experience" : 1
+}
+{
+	"_id" : 3,
+	"fname" : "aakash",
+	"lname" : "ns",
+	"age" : 21,
+	"email" : "aakashns@gmail.com",
+	"phone" : "9102066123",
+	"experience" : 2
+}
+{
+	"_id" : 4,
+	"fname" : "ali",
+	"lname" : "shawn",
+	"age" : 21,
+	"email" : "alis@gmail.com",
+	"phone" : "9102061234",
+	"experience" : 3
+}
+{
+	"_id" : 5,
+	"fname" : "abhay",
+	"lname" : "yelameli",
+	"age" : 29,
+	"email" : "abhayyelameli@gmail.com",
+	"phone" : "9102001234",
+	"experience" : 8
+}
+{
+	"_id" : 6,
+	"fname" : "alok",
+	"lname" : "kumar",
+	"age" : 27,
+	"email" : "alokkumar@gmail.com",
+	"phone" : "000001234",
+	"experience" : 7
+}
+{
+	"_id" : 7,
+	"fname" : "namitha",
+	"lname" : "shree",
+	"age" : 24,
+	"email" : "namithashree@gmail.com",
+	"phone" : "000003737",
+	"experience" : 3
+}
+{
+	"_id" : 8,
+	"fname" : "rig",
+	"lname" : "smith",
+	"age" : 24,
+	"email" : "rigsmith@gmail.com",
+	"phone" : "000003730",
+	"experience" : 5
+}
+{
+	"_id" : 9,
+	"fname" : "racheal",
+	"lname" : "ross",
+	"age" : 24,
+	"email" : "racheal@gmail.com",
+	"phone" : "000003730",
+	"experience" : 6
+}
+{
+	"_id" : 10,
+	"fname" : "john",
+	"lname" : "snow",
+	"age" : 27,
+	"email" : "johnsnow@gmail.com",
+	"phone" : "000003000",
+	"experience" : 6
+}
+> db.test.find().pretty();
+{
+	"_id" : ObjectId("6059c1c9baeba38c780f3405"),
+	"name" : "rahhav",
+	"age" : 5
+}
+{ "_id" : ObjectId("6059c1c9baeba38c780f3406"), "name" : "ali", "age" : 6 }
+{
+	"_id" : ObjectId("6059c1c9baeba38c780f3407"),
+	"name" : "aakash",
+	"age" : 7
+}
+> db.dropCollection("test");
+2021-03-23T15:57:11.273+0530 E QUERY    [thread1] TypeError: db.dropCollection is not a function :
+@(shell):1:1
+> db.employeedetails.save({_id:11,fname:"john"})
+WriteResult({ "nMatched" : 0, "nUpserted" : 1, "nModified" : 0, "_id" : 11 })
+> db.employeedetails.find().pretty();
+{
+	"_id" : 1,
+	"fname" : "rohan",
+	"lname" : "sharma",
+	"age" : 26,
+	"email" : "rohansharma@gmail.com",
+	"phone" : "91085066112",
+	"experience" : 5
+}
+{
+	"_id" : 2,
+	"fname" : "raghav",
+	"lname" : "agali",
+	"age" : 21,
+	"email" : "raghavafgali@gmail.com",
+	"phone" : "9102066112",
+	"experience" : 1
+}
+{
+	"_id" : 3,
+	"fname" : "aakash",
+	"lname" : "ns",
+	"age" : 21,
+	"email" : "aakashns@gmail.com",
+	"phone" : "9102066123",
+	"experience" : 2
+}
+{
+	"_id" : 4,
+	"fname" : "ali",
+	"lname" : "shawn",
+	"age" : 21,
+	"email" : "alis@gmail.com",
+	"phone" : "9102061234",
+	"experience" : 3
+}
+{
+	"_id" : 5,
+	"fname" : "abhay",
+	"lname" : "yelameli",
+	"age" : 29,
+	"email" : "abhayyelameli@gmail.com",
+	"phone" : "9102001234",
+	"experience" : 8
+}
+{
+	"_id" : 6,
+	"fname" : "alok",
+	"lname" : "kumar",
+	"age" : 27,
+	"email" : "alokkumar@gmail.com",
+	"phone" : "000001234",
+	"experience" : 7
+}
+{
+	"_id" : 7,
+	"fname" : "namitha",
+	"lname" : "shree",
+	"age" : 24,
+	"email" : "namithashree@gmail.com",
+	"phone" : "000003737",
+	"experience" : 3
+}
+{
+	"_id" : 8,
+	"fname" : "rig",
+	"lname" : "smith",
+	"age" : 24,
+	"email" : "rigsmith@gmail.com",
+	"phone" : "000003730",
+	"experience" : 5
+}
+{
+	"_id" : 9,
+	"fname" : "racheal",
+	"lname" : "ross",
+	"age" : 24,
+	"email" : "racheal@gmail.com",
+	"phone" : "000003730",
+	"experience" : 6
+}
+{
+	"_id" : 10,
+	"fname" : "john",
+	"lname" : "snow",
+	"age" : 27,
+	"email" : "johnsnow@gmail.com",
+	"phone" : "000003000",
+	"experience" : 6
+}
+{ "_id" : 11, "fname" : "john" }
+> db.employeedetails.save({_id:6,fname:"ashish"})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.employeedetails.find(fname:"racheal");
+2021-03-23T16:00:40.506+0530 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:29
+> db.employeedetails.find({fname:"racheal"});
+{ "_id" : 9, "fname" : "racheal", "lname" : "ross", "age" : 24, "email" : "racheal@gmail.com", "phone" : "000003730", "experience" : 6 }
+> db.employeedetails.find({lname:"smith",experience:5});
+{ "_id" : 8, "fname" : "rig", "lname" : "smith", "age" : 24, "email" : "rigsmith@gmail.com", "phone" : "000003730", "experience" : 5 }
+> db.employeedetails.find($or:[{experience:5}, {experience:5}]);
+2021-03-23T16:04:17.131+0530 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:27
+> db.employeedetails.find($or:[{experience:"5"}, {experience:"6"}]});
+2021-03-23T16:04:36.352+0530 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:27
+> db.employeedetails.find({$or:[{experience:"5"}, {experience:"6"}]});
+> db.employeedetails.find({$or:[{experience:5}, {experience:6}]});
+{ "_id" : 1, "fname" : "rohan", "lname" : "sharma", "age" : 26, "email" : "rohansharma@gmail.com", "phone" : "91085066112", "experience" : 5 }
+{ "_id" : 8, "fname" : "rig", "lname" : "smith", "age" : 24, "email" : "rigsmith@gmail.com", "phone" : "000003730", "experience" : 5 }
+{ "_id" : 9, "fname" : "racheal", "lname" : "ross", "age" : 24, "email" : "racheal@gmail.com", "phone" : "000003730", "experience" : 6 }
+{ "_id" : 10, "fname" : "john", "lname" : "snow", "age" : 27, "email" : "johnsnow@gmail.com", "phone" : "000003000", "experience" : 6 }
+> db.employeedetails.find({$or:[{experience:5}, {experience:6}]}).pretty();
+{
+	"_id" : 1,
+	"fname" : "rohan",
+	"lname" : "sharma",
+	"age" : 26,
+	"email" : "rohansharma@gmail.com",
+	"phone" : "91085066112",
+	"experience" : 5
+}
+{
+	"_id" : 8,
+	"fname" : "rig",
+	"lname" : "smith",
+	"age" : 24,
+	"email" : "rigsmith@gmail.com",
+	"phone" : "000003730",
+	"experience" : 5
+}
+{
+	"_id" : 9,
+	"fname" : "racheal",
+	"lname" : "ross",
+	"age" : 24,
+	"email" : "racheal@gmail.com",
+	"phone" : "000003730",
+	"experience" : 6
+}
+{
+	"_id" : 10,
+	"fname" : "john",
+	"lname" : "snow",
+	"age" : 27,
+	"email" : "johnsnow@gmail.com",
+	"phone" : "000003000",
+	"experience" : 6
+}
+> ^C
+bye
+home@raghav:~$ 
+
+
